@@ -1,0 +1,34 @@
+[GLOBAL]
+pants_version = "2.16.0"
+backend_packages = [
+  "pants.backend.docker",
+  "pants.backend.docker.lint.hadolint",
+  "pants.backend.shell",
+  "pants.backend.python",
+  "pants.backend.python.lint.bandit",
+  "pants.backend.python.lint.black",
+  "pants.backend.python.lint.flake8",
+  "pants.backend.python.lint.isort",
+  "pants.backend.python.lint.pylint",
+  "pants.backend.python.mixed_interpreter_constraints",
+  "pants.backend.experimental.python",
+  "pants.backend.experimental.python.typecheck.pyright",
+  "pants.backend.experimental.tools.yamllint",
+  "pants.backend.experimental.helm",
+  "pants.backend.shell.lint.shellcheck",
+]
+unmatched_build_file_globs = "error"
+
+[python]
+pip_version = "22.2.2"
+interpreter_constraints = [">=3.10, <3.11"]
+
+[python-bootstrap]
+# We search for interpreters both on the $PATH and in the `$(pyenv root)/versions` folder.
+#  If you're using macOS, you may want to leave off the <PATH> entry to avoid using the
+#  problematic system Pythons. See
+#  https://www.pantsbuild.org/docs/python-interpreter-compatibility#changing-the-interpreter-search-path.
+search_path = ["<PYENV>", "<PATH>"]
+
+[python-infer]
+ambiguity_resolution = "by_source_root"
